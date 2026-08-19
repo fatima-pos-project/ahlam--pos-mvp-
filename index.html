@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POS Transaction Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="loginPage" class="page">
+    <div class="login-card">
+      <h1>POS Transaction Manager</h1>
+      <p class="muted">AHLAM IT MVP Project</p>
+      <form id="loginForm">
+        <label>Username</label>
+        <input id="username" type="text" placeholder="Enter username" required>
+        <label>Password</label>
+        <input id="password" type="password" placeholder="Enter password" required>
+        <button type="submit">Login</button>
+        <p id="loginError" class="error"></p>
+        <p class="demo">Demo: <b>admin</b> / <b>1234</b></p>
+      </form>
+    </div>
+  </div>
+
+  <div id="appPage" class="page hidden">
+    <header>
+      <div>
+        <h1>POS Transaction Manager</h1>
+        <p>Record and manage POS transactions</p>
+      </div>
+      <button id="logoutBtn" class="secondary">Logout</button>
+    </header>
+
+    <main>
+      <section class="summary">
+        <div class="card"><span>Total Transactions</span><strong id="totalCount">0</strong></div>
+        <div class="card"><span>Total Amount</span><strong id="totalAmount">₦0.00</strong></div>
+        <div class="card"><span>Cash In</span><strong id="cashIn">₦0.00</strong></div>
+        <div class="card"><span>Cash Out</span><strong id="cashOut">₦0.00</strong></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-title">
+          <h2 id="formTitle">Add Transaction</h2>
+        </div>
+        <form id="transactionForm" class="transaction-form">
+          <input type="hidden" id="editId">
+          <div>
+            <label>Date</label>
+            <input id="date" type="date" required>
+          </div>
+          <div>
+            <label>Type</label>
+            <select id="type" required>
+              <option value="Cash In">Cash In</option>
+              <option value="Cash Out">Cash Out</option>
+              <option value="Transfer">Transfer</option>
+              <option value="Withdrawal">Withdrawal</option>
+            </select>
+          </div>
+          <div>
+            <label>Amount (₦)</label>
+            <input id="amount" type="number" min="0" step="0.01" placeholder="0.00" required>
+          </div>
+          <div>
+            <label>Reference</label>
+            <input id="reference" type="text" placeholder="e.g. POS001" required>
+          </div>
+          <div class="full">
+            <label>Description</label>
+            <input id="description" type="text" placeholder="Transaction description">
+          </div>
+          <div class="actions full">
+            <button type="submit" id="saveBtn">Save Transaction</button>
+            <button type="button" id="cancelBtn" class="secondary hidden">Cancel Edit</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="table-head">
+          <h2>Transactions</h2>
+          <input id="search" type="search" placeholder="Search reference, type or description...">
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Reference</th>
+                <th>Description</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="transactionBody"></tbody>
+          </table>
+        </div>
+        <p id="emptyState" class="muted center">No transactions yet.</p>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
